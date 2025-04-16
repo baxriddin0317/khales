@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import styled from "styled-components";
-import logo from "../../public/assets/Khales Logo.png";
+import logo from "../../public/assets/Khales-Logo.png";
 import { useLanguage } from "../../Context/Languagecontext";
 import Image from "next/image";
 

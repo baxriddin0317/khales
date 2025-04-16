@@ -36,7 +36,7 @@ export default function Hero() {
   }, [inView, animation]);
   return (
     <Herosection ref={ref}>
-      <Heroimg src={img} />
+      <Heroimg src={img} alt="hero img" />
       <Textdiv style={{marginTop:'100px'}}>
 <Head2><p>Designs That Speak: </p></Head2>
 <br></br>

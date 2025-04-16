@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import logo from "../../public/assets/Khales Logo.png";
+import logo from "../../public/assets/Khales-Logo.png";
 import { footerSocialData } from "../../data/FooterData";
 import { FooterLogo, FooterSocialIcon, SocialIcon } from "./FooterStyles";
 import { Row2 } from "../../utils/Globalstyles";

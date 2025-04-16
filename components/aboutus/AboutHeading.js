@@ -8,7 +8,7 @@ export const AboutHeading = () => {
       <HeadingIcon
         loading="lazy"
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/73434e76f973691b7fdace17fa70b30849906609c64b3ef65c287a19a58643b2?placeholderIfAbsent=true&apiKey=aa3beaa1347a405eb89ef941921d55f8"
-        alt=""
+        alt="heading icon"
         aria-hidden="true"
       />
       <Heading>About Us</Heading>

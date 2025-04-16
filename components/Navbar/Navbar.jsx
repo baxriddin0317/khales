@@ -159,7 +159,7 @@ const Navbar = () => {
       <NavbarContainer>
         <Link href={`/`}>
           <NavLogo >
-            <NavIcon src="/assets/Khales Logo.png" />
+            <NavIcon src="/assets/Khales-Logo.png" alt="site logo" />
           </NavLogo>
         </Link>
         <MobileIcon onClick={handleClick}>

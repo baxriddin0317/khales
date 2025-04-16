@@ -1,32 +1,43 @@
-import React from 'react'
-import dynamic from 'next/dynamic';
-
-// export const metadata = {
-//   title: 'Aboutus - Khales',
-//   description: 'Welcome to projects.',
-// };
+import React from "react";
+import dynamic from "next/dynamic";
 
 export const metadata = {
-  title: 'About Us - Khales',
-  description: 'Welcome to projects.',
-  keywords: 'about us, khales, mission, vision, company info',
+  title: "Aboutus - Khales",
+  description:
+    "Welcome to Khales. Explore our luxury design and project management solutions.",
+  keywords: [
+    "Khales",
+    "Luxury Design",
+    "Interior Design",
+    "Architecture",
+    "Project Management",
+    "Construction",
+    "Khales Projects",
+  ],
+  authors: [{ name: "Khales Team", url: "http://localhost:3000/" }],
+  creator: "Khales",
+  metadataBase: new URL("http://localhost:3000/"),
   openGraph: {
-    title: 'About Us - Khales',
-    description: 'Welcome to projects.',
-    url: 'https://yourdomain.com/aboutus',
-    siteName: 'Khales',
-    locale: 'en_US',
-    type: 'website'
+    title: "Aboutus - Khales",
+    description:
+      "Welcome to Khales. Explore our luxury design and project management solutions.",
+    url: "http://localhost:3000/",
+    siteName: "Khales",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aboutus - Khales",
+    description:
+      "Welcome to Khales. Explore our luxury design and project management solutions.",
   },
 };
-
 // Lazy load to avoid hydration mismatch
-const AboutusPage = dynamic(() => import('@/pages/AboutsusPage'));
+const AboutusPage = dynamic(() => import("@/pages/AboutsusPage"));
 
 const AboutUs = () => {
-  return (
-    <AboutusPage />
-  )
-}
+  return <AboutusPage />;
+};
 
-export default AboutUs
+export default AboutUs;
