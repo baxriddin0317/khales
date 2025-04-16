@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 
 // 1) Define the keyframes
@@ -75,7 +76,7 @@ export const NavPills = styled.ul`
     }
   }
 `;
-export const AllProjectsLink = styled.span`
+export const AllProjectsLink = styled(Link)`
   display: inline-block;
   border: 1px solid #66a109;
   border-radius: 50px;

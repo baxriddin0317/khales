@@ -4,7 +4,8 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import "./Styles.css";
-import { EffectCube, Autoplay, Pagination, Navigation } from "swiper/modules";
+import { EffectCube, Autoplay, Pagination } from "swiper/modules";
+import Image from "next/image";
 // configure Swiper to use modules
 
 function CubeSwiper() {
@@ -31,16 +32,16 @@ function CubeSwiper() {
         className="swipercube"
       >
         <SwiperSlide className="swipercube-slide">
-          <img src="https://i.ibb.co/RmkrGcG/pool-min.jpg" />
+          <Image src="https://i.ibb.co/RmkrGcG/pool-min.jpg" alt="cube img 1" fill />
         </SwiperSlide>
         <SwiperSlide className="swipercube-slide">
-          <img src="https://i.ibb.co/xKhfYtPD/interior-min.jpg" />
+          <Image src="https://i.ibb.co/xKhfYtPD/interior-min.jpg" alt="cube img 2" fill />
         </SwiperSlide>
         <SwiperSlide className="swipercube-slide">
-          <img src="https://i.ibb.co/XrwLfbVn/khales-ae-arab-construction-luxury-engineering-make-it-crea-adbc814e-5da3-4265-a683-b41679c9a755-3-e.png" />
+          <Image fill src="https://i.ibb.co/XrwLfbVn/khales-ae-arab-construction-luxury-engineering-make-it-crea-adbc814e-5da3-4265-a683-b41679c9a755-3-e.png" alt="cube img 3" />
         </SwiperSlide>
         <SwiperSlide className="swipercube-slide">
-          <img src="https://i.ibb.co/HDQkwccZ/khales-ae-Modern-minimalist-interior-staircase-open-plan-desi-2ba91f49-ab7b-4ab5-972a-69e06f911a30-1.png" />
+          <Image fill src="https://i.ibb.co/HDQkwccZ/khales-ae-Modern-minimalist-interior-staircase-open-plan-desi-2ba91f49-ab7b-4ab5-972a-69e06f911a30-1.png" alt="cube img 4" />
         </SwiperSlide>
       </Swiper>
     </div>

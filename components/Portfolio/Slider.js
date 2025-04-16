@@ -191,6 +191,7 @@ function Item({
         onClick={click}
         onPointerOver={over}
         onPointerOut={out}
+        alt="slide img"
         {...props} // Other props can still be spread
       />
       {clicked === index && (

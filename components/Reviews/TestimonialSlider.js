@@ -8,6 +8,7 @@ import { Autoplay } from "swiper/modules";
 import { GreenText, Title } from "../Whoweare/TextContent";
 import { useLanguage } from "../../Context/Languagecontext"; // Import the language context
 import "./TestimonialSlider.css";
+import Image from "next/image";
 
 const TestimonialSlider = () => {
   const { language } = useLanguage(); // Get the current language
@@ -142,7 +143,7 @@ const TestimonialSlider = () => {
                       <img src={testimonial.avatar} alt="Avatar" />
                     </div>
                     <div className="testimonial-detail">
-                      <img src={testimonial.logo} alt="Company Logo" />
+                      <Image src={testimonial.logo} width={200} height={35} alt="Company Logo" />
                       <p>{testimonial.text}</p>
                       <span>{testimonial.name}</span>
                     </div>
@@ -158,7 +159,7 @@ const TestimonialSlider = () => {
               <div className="company-box" key={index}>
                 <div className="company-box-inner">
                   <div className="company-box-top">
-                    <img
+                    <Image
                       src={company.logo}
                       alt="Company Logo"
                       style={{
@@ -166,6 +167,8 @@ const TestimonialSlider = () => {
                         height: "100px",
                         objectFit: "fill",
                       }}
+                      width={100}
+                      height={100}
                     />
                   </div>
                   <div className="company-box-bottom">
