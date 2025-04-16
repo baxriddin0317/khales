@@ -25,4 +25,13 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
-export const useLanguage = () => useContext(LanguageContext);
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+
+  if (context === undefined) {
+    // Prevent error during SSR or misplacement
+    return { language: "eng", changeLanguage: () => {} };
+  }
+
+  return context;
+};
