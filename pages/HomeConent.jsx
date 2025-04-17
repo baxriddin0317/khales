@@ -8,6 +8,7 @@ import FeaturedProjects from "@/components/Featured Projects/FeaturedProjects";
 import TestimonialSlider from "@/components/Reviews/TestimonialSlider";
 import CTASection from "@/components/Homecontact/CTASection";
 import dynamic from "next/dynamic";
+import Hero from "@/components/Hero/Hero";
 const HeroSlider = dynamic(() => import("@/components/Slider/Slider"));
 
 export default function HomeContent() {
@@ -29,12 +30,7 @@ export default function HomeContent() {
             ? "مرحبًا بك في Khales"
             : "Welcome to Khales"}
         </h1>
-        <HeroSlider
-          slides={slides[language] || slides["eng"]}
-          language={language}
-          isLoading={isLoading}
-          rtl={language === "ar"}
-        />{" "}
+        <Hero />     
       </section>
       <WhoAreWe />
       <ServicesSwiper />

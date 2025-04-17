@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 
-export const Herosection = styled.section`
+export const Herosection = styled.div`
   height: 100vh;
   background-position: center;
   background-size: cover;

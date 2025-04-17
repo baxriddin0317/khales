@@ -6,9 +6,7 @@ export const Globalstyle = createGlobalStyle`*{
 box-sizing: border-box;
 margin: 0;
 padding: 0px;
-                      font-family: "Inter";
-
-
+font-family:  "Playfair";
 }`;
 export const Container = styled.div`
   width: 100%;
@@ -173,6 +171,7 @@ export const Row2 = styled(motion.div)`
   height: ${({ height }) => (height ? height : "auto")};
   max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : "auto")};
   min-height: ${({ minHeight }) => (minHeight ? minHeight : "auto")};
+  margin-bottom: 50px;
   flex-wrap: ${({ wrap }) => (wrap ? wrap : "")};
   @media screen and (max-width: 968px) {
     padding: 0 30px;
@@ -181,7 +180,7 @@ export const Row2 = styled(motion.div)`
     align-items: center;
   }
 `;
-export const Column = styled.section`
+export const Column = styled.div`
   display: flex;
   flex-direction: column;
 

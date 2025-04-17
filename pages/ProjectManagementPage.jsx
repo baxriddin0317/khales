@@ -10,14 +10,14 @@ import CTASection from "../components/Homecontact/CTASection";
 import ProjectHighlight from "../components/Projecthighlights/ProjectHighlight";
 import { useLanguage } from "../Context/Languagecontext"; // Import the language context
 import dynamic from "next/dynamic";
+import banner from "@/public/assets/banner/project.jpeg";
 const HeroSlider = dynamic(() => import('@/components/Slider/Slider'));
 
 export const slides = {
   eng: [
     {
       id: 1,
-      image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+      image: banner,
       title: "Efficient Project Management for Success",
       content: "Delivering seamless projects from concept to completion",
       button: "Let’s Get Started",
@@ -26,8 +26,7 @@ export const slides = {
   ar: [
     {
       id: 1,
-      image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+      image: banner,
       title: "إدارة مشاريع فعالة لتحقيق النجاح",
       content: "تنفيذ مشاريع متكاملة من الفكرة إلى الإنجاز",
       button: "لنبدأ الآن",

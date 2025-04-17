@@ -9,13 +9,13 @@ import ProjectHighlight from "../components/Projecthighlights/ProjectHighlight";
 import dynamic from "next/dynamic";
 const HeroSlider = dynamic(() => import('@/components/Slider/Slider'));
 import { useLanguage } from "../Context/Languagecontext"; // Import the language context
+import banner from "@/public/assets/banner/project.jpeg"
 
 export const slides = {
   eng: [
     {
       id: 1,
-      image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+      image: banner,
       title: "Engineering Excellence That Inspires",
       content: "Innovative engineering solutions tailored to your vision.",
       button: "Talk to an Expert",
@@ -24,8 +24,7 @@ export const slides = {
   ar: [
     {
       id: 1,
-      image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+      image: banner,
       title: "هندسة بإتقان تلهم",
       content: "حلول هندسية مبتكرة تتماشى مع رؤيتك.",
       button: "تواصل مع خبير",

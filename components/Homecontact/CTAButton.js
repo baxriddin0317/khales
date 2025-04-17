@@ -4,14 +4,14 @@ import Link from "next/link";
 import * as React from "react";
 import styled from "styled-components";
 
-export const StyledButton = styled.span`
+export const StyledButton = styled(Link)`
   display: flex;
   align-items: center;
   gap: 15px;
   justify-content: center;
   z-index: 1;
   border-radius: 5px;
-  background-color: #545454;
+  background-color: rgba(92, 145, 8, 1);
   padding: 11px 25px;
   font-size: 18px;
   color: rgba(255, 255, 255, 1);
@@ -22,7 +22,7 @@ export const StyledButton = styled.span`
   transition: background-color 0.2s ease;
   text-decoration: none;
   &:hover {
-    background-color: rgba(92, 145, 8, 1);
+    background-color: #545454;
   }
 
   &:focus {
@@ -60,16 +60,14 @@ const ButtonIcon = styled.img`
 
 export const CTAButton = ({ children, onClick }) => {
   return (
-    <Link href={"/contact"} aria-label="Contact us">
-      <StyledButton>
-        <ButtonText>{children}</ButtonText>
-        <ButtonIcon
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/db98ceeb93fa8fe08fe5ecdbfa924a2b80fbc4555d9dfb5e1b35fc239e9f5393?placeholderIfAbsent=true&apiKey=aa3beaa1347a405eb89ef941921d55f8"
-          alt=""
-          aria-hidden="true"
-        />
-      </StyledButton>
-    </Link>
+    <StyledButton href={"/contact"} aria-label="Contact us">
+      <ButtonText>{children}</ButtonText>
+      <ButtonIcon
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/db98ceeb93fa8fe08fe5ecdbfa924a2b80fbc4555d9dfb5e1b35fc239e9f5393?placeholderIfAbsent=true&apiKey=aa3beaa1347a405eb89ef941921d55f8"
+        alt=""
+        aria-hidden="true"
+      />
+    </StyledButton>
   );
 };

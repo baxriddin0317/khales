@@ -92,11 +92,6 @@ const HeaderComponent = ({ isActive, eventKey, title, language, ...rest }) => (
   >
     <Stack spacing={2} direction="column" alignItems="flex-start">
       <HeaderRow $rtl={language === "ar"}>
-        <HeaderNumber>
-          {language === "ar"
-            ? `/${parseInt(eventKey, 10) + 1}`
-            : `${parseInt(eventKey, 10) + 1}/`}
-        </HeaderNumber>
         <HeaderTitle $isActive={isActive}>{title}</HeaderTitle>
       </HeaderRow>
     </Stack>
@@ -130,7 +125,7 @@ function OurProcessWork({ panels, button }) {
                 <HeaderComponent
                   language={language}
                   title={panel.title}
-                  isActive={activeKey === index.toString() ? true : false}
+                  isActive={activeKey === index.toString()}
                   eventKey={index.toString()}
                 />
               }

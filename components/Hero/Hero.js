@@ -1,105 +1,145 @@
-import React from "react";
-import {
-  Head2,
-  Head3,
-  Heroimg,
-  Herosection,
-  Textdiv,
-  Underline,
-  Underlinev,
-} from "./Herostyles";
-import img from "../../public/assets/Projects.jpg";
-import { Button, Button2, Row } from "../../Globalstyles";
-import { useState, useEffect } from "react";
-import VisibilitySensor from "react-visibility-sensor";
-import NumberCounter from "number-counter";
-import '../../App.css'
-
+import React, { useState, useRef, useEffect } from "react";
+import { Herosection } from "./Herostyles";
 import { useInView } from "react-intersection-observer";
-import { useAnimation, motion } from "framer-motion";
+import { useAnimation } from "framer-motion";
 import styled from "styled-components";
-const Statics=styled.p`
-font-family:inter ;margin-top:20px,font-size:'20px'
-`
+import {
+  FaVolumeMute,
+  FaVolumeUp,
+  FaPlay,
+  FaPause,
+  FaRedo,
+} from "react-icons/fa";
+import "@/app/globals.css"
+
+const VideoOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2); // Adjust the opacity here
+  z-index: -1; // same as video to keep them together
+`;
+
+const StyledVideo = styled.video`
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  @media screen and (max-width: 968px) {
+    width: 100%;
+    height: 60vh;
+  }
+`;
+
+// Styled component for video controls container
+const ControlsWrapper = styled.div`
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 30px;
+  align-items: center;
+  @media screen and (max-width: 968px) {
+    bottom: 30vh;
+  }
+`;
+
+// Styled icon buttons
+const IconButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+    color: #66a109;
+  }
+`;
+
+// Statics text style
+const Statics = styled.p`
+  font-family: Inter;
+  margin-top: 20px;
+  font-size: 20px;
+`;
+
 export default function Hero() {
-  const initial = { opacity: 0, y: -20 };
   const animation = useAnimation();
   const { ref, inView } = useInView({ threshold: 0.2 });
+
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef(null);
+
   useEffect(() => {
     if (!inView) {
-      console.log("sss");
-      animation.start({
-        opacity: 1,
-        y: 1,
-      });
+      animation.start({ opacity: 1, y: 1 });
     }
   }, [inView, animation]);
+
+  const toggleMute = () => {
+    setIsMuted((prev) => !prev);
+  };
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (video) {
+      if (video.paused) {
+        video.play();
+        setIsPlaying(true);
+      } else {
+        video.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  const handleReplay = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play();
+      setIsPlaying(true);
+    }
+  };
+
+  // const videoSource = require("../../public/assets/Untitled video - Made with Clipchamp.mp4"); // replace with your actual video file
+
   return (
     <Herosection ref={ref}>
-      <Heroimg src={img} alt="hero img" />
-      <Textdiv style={{marginTop:'100px'}}>
-<Head2><p>Designs That Speak: </p></Head2>
-<br></br>
-<Underline style={{marginTop:'10px'}}></Underline>
-<br></br>
-<Head3 > <p style={{}}>Our Featured Works </p>
-</Head3>
-     </Textdiv>     <Textdiv><Row>
+      <StyledVideo
+        ref={videoRef}
+        src={'./assets/Untitled video - Made with Clipchamp.mp4'}
+        autoPlay
+        loop
+        muted={isMuted}
+        playsInline
+      />
+      <VideoOverlay />
 
-        <VisibilitySensor partialVisibility offset={{ bottom: 10 }}>
-        {({ isVisible }) => (
-                  <div>
-                    {isVisible ? (
-                      <NumberCounter
-                        end={10}
-                        delay={1.5}
-                        className="increment"
-                        // preFix="Up revenue:"
-                        postFix=""
-                      />
-                    ) : null}{" "}
-                    <Statics > Years Of Experience
-                    </Statics>
-                  </div>
-                )}
-        </VisibilitySensor><Underlinev></Underlinev>
-        <VisibilitySensor partialVisibility offset={{ bottom: 10 }}>
-        {({ isVisible }) => (
-                  <div>
-                    {isVisible ? (
-                      <NumberCounter
-                        end={100}
-                        delay={2.2}
-                        className="increment"
-                        // preFix="Up revenue:"
-                        postFix="%"
-                      />
-                    ) : null}{" "}
-                    <Statics > Quality</Statics>
-                  </div>
-                )}
-        </VisibilitySensor>
-
-        <Underlinev></Underlinev>
-     <VisibilitySensor partialVisibility offset={{ bottom: 10 }}>
-        {({ isVisible }) => (
-                  <div>
-                    {isVisible ? (
-                      <NumberCounter
-                        end={200}
-                        delay={3}
-                        className="increment"
-                        // preFix="Up revenue:"
-                        postFix=""
-                      />
-                    ) : null}{" "}
-                    <Statics> Happy Clients
-                    </Statics>
-                  </div>
-                )}
-        </VisibilitySensor>
-     </Row>
-     </Textdiv>
+      {/* Controls at bottom center */}
+      <ControlsWrapper>
+        <IconButton onClick={toggleMute}>
+          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+        </IconButton>
+        <IconButton onClick={togglePlay}>
+          {isPlaying ? <FaPause /> : <FaPlay />}
+        </IconButton>
+        <IconButton onClick={handleReplay}>
+          <FaRedo />
+        </IconButton>
+      </ControlsWrapper>
     </Herosection>
   );
 }

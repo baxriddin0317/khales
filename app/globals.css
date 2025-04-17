@@ -1,5 +1,6 @@
 /* app css */
 .App {
+  font-family: "Playfair";
   text-align: center;
 }
 
@@ -75,16 +76,23 @@
 }
 
 /* index.css */
+@font-face {
+  font-family: "Playfair";
+  src: local("Playfair Meduim"), local("Playfair-Meduim"),
+    url("/src/fonts/Playfair_144pt-Medium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+*{
+  font-family: "Playfair";
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Playfair";
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Playfair";
 }

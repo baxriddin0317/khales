@@ -11,17 +11,45 @@ import {
   NavIcon,
   MobileIcon,
   NavMenu,
+  NavLinks,
   NavItem,
   Text,
-  StyledButton
 } from "./NavbarStyles.js";
 
-import useDeviceSize from "@/utils/WindowSize.js";
+import styled from "styled-components";
+import useDeviceSize from "../../utils/WindowSize";
 import { useLanguage } from "../../Context/Languagecontext.js";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const Navbar = () => {
+  const servicePaths = [
+    "/service",
+    "/ProjectManagement",
+    "/Developmentplanning",
+    "/ArchitectureDesign",
+    "/BuildingContracting",
+    "/EngineeringConsultancy",
+    "/InteriorDesign",
+    "/LandscapingDesign",
+    "/RealEstate",
+    "/Fit-OutDesign",
+  ];
+  const homePaths = ["/", "/ABOUTUS", "/PROJECTS", "/Blogs"];
+  const isServicePath = () => {
+    return servicePaths.some(
+      (path) =>
+        pathname === path || pathname.startsWith(path + "/")
+    );
+  };
+
+  const isHomePath = () => {
+    return homePaths.some(
+      (path) =>
+        pathname === path || pathname.startsWith(path + "/")
+    );
+  };
+
   const [isSticky, setSticky] = useState(false);
   const { language, changeLanguage } = useLanguage();
   const pathname = usePathname();
@@ -37,25 +65,62 @@ const Navbar = () => {
     };
   }, []);
 
+  const StyledButton = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    z-index: 1;
+    border-radius: 5px;
+    background-color: rgba(92, 145, 8, 1);
+    padding: 11px 25px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 0.36px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    &:hover {
+      background-color: #545454;
+    }
+
+    &:focus {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 991px) {
+      width: 230px;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-right: 0px;
+    }
+  `;
+
   const tabE = [
     "Home",
     "Services",
     "Project Management",
     "Development Planning",
     "Architecture",
-    "Building Contracting",
+    "Projects feasibility study",
     "Engineering Consultancy",
     "Interior Design",
     "Landscaping",
-    "Real Estate",
+    "Investing",
     "Fit-Out",
     "Portfolio",
-    "Connet",
+    "Connect",
     "About Khales",
+    "Blogs",
     "FAQ",
     "Language",
     "Arabic",
     "English",
+    "View All Services",
   ];
 
   const tabA = [
@@ -64,19 +129,21 @@ const Navbar = () => {
     "إدارة مشاريع",
     "مخطط تطوير",
     "المعمارية",
-    "عقود بناء",
+    "دراسة جدوى",
     "استشارات هندسية",
     " تصميم داخلي",
     " المناظر الطبيعية",
-    "حلول عقارية",
+    "الإستثمار",
     "التجهيز الداخلي",
     "المشاريع",
     " اتصل بنا",
     "نبذة عنا",
+    "المدونة",
     "الاسئلة الشائعه",
     "اللغة",
     "العربية",
     "الانجليزية",
+    "تصفح كل الخدمات",
   ];
 
   const [show, setShow] = useState(false);
@@ -88,7 +155,6 @@ const Navbar = () => {
 
   const handleLanguageChange = (lang) => {
     changeLanguage(lang);
-    // Remove the NavLink navigation and just change the language
   };
 
   const [isMenu, setisMenu] = useState(false);
@@ -106,118 +172,153 @@ const Navbar = () => {
     boxClass.push("");
   }
 
+  const [isMenuSubMenuHome, setMenuSubMenuHome] = useState(false);
+
+  let boxClassSubMenuHome = ["sub__menus"];
+  if (isMenuSubMenuHome) {
+    boxClassSubMenuHome.push("sub__menus__Active");
+  }
+
   const [isMenuSubMenu, setMenuSubMenu] = useState(false);
-  const toggleSubmenu = () => {
-    setMenuSubMenu(isMenuSubMenu === false ? true : false);
-  };
+
   let boxClassSubMenu = ["sub__menus"];
-  if (isMenuSubMenu) {
-    boxClassSubMenu.push("sub__menus__Active");
-  } else {
-    boxClassSubMenu.push("");
-  }
-
-  const [isMenuSubMenu2, setMenuSubMenu2] = useState(false);
-  const toggleSubmenu2 = () => {
-    setMenuSubMenu2(isMenuSubMenu2 === false ? true : false);
-  };
-  let boxClassSubMenu2 = ["sub__menus"];
-  if (isMenuSubMenu2) {
-    boxClassSubMenu2.push("sub__menus__Active");
-  } else {
-    boxClassSubMenu2.push("");
-  }
-
-  const [isMenuSubMenu3, setMenuSubMenu3] = useState(false);
-  const toggleSubmenu3 = () => {
-    setMenuSubMenu3(isMenuSubMenu3 === false ? true : false);
-  };
-  let boxClassSubMenu3 = ["sub__menus"];
-  if (isMenuSubMenu3) {
-    boxClassSubMenu3.push("sub__menus__Active");
-  } else {
-    boxClassSubMenu3.push("");
-  }
+  if (isMenuSubMenu) boxClassSubMenu.push("sub__menus__Active");
 
   const [isMenuSubMenu4, setMenuSubMenu4] = useState(false);
-  const toggleSubmenu4 = () => {
-    setMenuSubMenu4(isMenuSubMenu4 === false ? true : false);
-  };
   let boxClassSubMenu4 = ["sub__menus"];
-  if (isMenuSubMenu4) {
-    boxClassSubMenu4.push("sub__menus__Active");
-  } else {
-    boxClassSubMenu4.push("");
-  }
+  if (isMenuSubMenu4) boxClassSubMenu4.push("sub__menus__Active");
 
-  const handleClick = () => {
-    setShow(!show);
+  const handleClick = () => setShow(!show);
+  const toggleSubmenuHome = () => {
+    setMenuSubMenuHome(!isMenuSubMenuHome);
+    setMenuSubMenu(false);
+    setMenuSubMenu4(false);
+  };
+
+  const toggleSubmenu = () => {
+    setMenuSubMenu(!isMenuSubMenu);
+    setMenuSubMenuHome(false);
+    setMenuSubMenu4(false);
+  };
+
+  const toggleSubmenu4 = () => {
+    setMenuSubMenu4(!isMenuSubMenu4);
+    setMenuSubMenuHome(false);
+    setMenuSubMenu(false);
   };
 
   return (
     <Nav className={isSticky ? "sticky" : ""}>
       <NavbarContainer>
-        <Link href={`/`}>
-          <NavLogo >
-            <NavIcon src="/assets/Khales-Logo.png" alt="site logo" />
-          </NavLogo>
-        </Link>
+        <NavLogo href="/">
+          <NavIcon src="/assets/Khales-Logo.png" alt="site logo" />
+        </NavLogo>
         <MobileIcon onClick={handleClick}>
           {show ? <FaTimes /> : <CgMenuRight />}
         </MobileIcon>
         <NavMenu $show={show}>
           <NavItem>
-            {useDeviceSize()[0] > "960" ? (
-              ""
-            ) : (
-              <StyledButton style={{ margin: "auto" }}>
+            {useDeviceSize()[0] > "960" ? null : (
+              <StyledButton href={`/booking`} style={{ margin: "auto" }}>
                 {language === "eng" ? "Book Consultation" : "أحجز موعدك الآن"}
               </StyledButton>
             )}
             <ul className={boxClass.join(" ")}>
-              <li className="menu-item">
-                <Link
-                  exact="true"
-                  className={pathname === '/' ? 'is-active' : ''}
-                  onClick={toggleClass}
-                  href={`/`}
-                >
-                  {" "}
+              <li
+                onClick={toggleSubmenuHome}
+                className={`menu-item sub__menus__arrows ${
+                  isHomePath() ? "active-home" : ""
+                }`}
+              >
+                <Link href="#">
                   <Text
                     style={{
-                      color: pathname === "/" ? "#66a109" : "black",
+                      color: isHomePath() ? "#66a109" : "black",
                     }}
                   >
-                    {" "}
-                    {tabs[0]}{" "}
+                    {tabs[0]}
                   </Text>
                 </Link>
+                <ul className={boxClassSubMenuHome.join(" ")}>
+                  <li>
+                    <Link
+                      href="/ABOUTUS"
+                      onClick={toggleClass}
+                      className="is-active"
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/ABOUTUS"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[13]}
+                      </Text>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/PROJECTS"
+                      onClick={toggleClass}
+                      className="is-active"
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/PROJECTS"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[11]}
+                      </Text>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/Blogs"
+                      onClick={toggleClass}
+                      className="is-active"
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/Blogs"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[14]}
+                      </Text>
+                    </Link>
+                  </li>
+                </ul>
               </li>
+
               <li
                 onClick={toggleSubmenu}
-                className="menu-item sub__menus__arrows"
+                className={`menu-item sub__menus__arrows ${
+                  isServicePath() ? "active-service" : ""
+                }`}
               >
-                {" "}
-                <Link href="/service">
-                  {" "}
+                <Link href="#">
                   <Text
                     style={{
-                      color:
-                        pathname === "/service" ? "#66a109" : "black",
+                      color: isServicePath() ? "#66a109" : "BLACK",
                     }}
                   >
                     {tabs[1]}
-                  </Text>{" "}
+                  </Text>
                 </Link>
                 <ul className={boxClassSubMenu.join(" ")}>
                   <li>
-                    {" "}
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/ProjectManagement`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -226,18 +327,16 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[2]}{" "}
-                      </Text>{" "}
-                    </Link>{" "}
+                        {tabs[2]}
+                      </Text>
+                    </Link>
                   </li>
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/Developmentplanning`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -246,18 +345,34 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[3]}{" "}
-                      </Text>{" "}
-                    </Link>{" "}
+                        {tabs[3]}
+                      </Text>
+                    </Link>
+                  </li>
+                  {/* <li>
+                    <Link
+                      onClick={toggleClass}
+                      className="is-active"
+                      href={`/ArchitectureDesign`}
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/ArchitectureDesign"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[4]}
+                      </Text>
+                    </Link>
                   </li>
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/BuildingContracting`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -266,18 +381,16 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[5]}{" "}
+                        {tabs[5]}
                       </Text>
-                    </Link>{" "}
-                  </li>{" "}
+                    </Link>
+                  </li> */}
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/EngineeringConsultancy`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -286,18 +399,16 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[6]}{" "}
+                        {tabs[6]}
                       </Text>
-                    </Link>{" "}
-                  </li>{" "}
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/InteriorDesign`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -306,18 +417,16 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[7]}{" "}
+                        {tabs[7]}
                       </Text>
-                    </Link>{" "}
-                  </li>{" "}
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/LandscapingDesign`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -326,18 +435,16 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[8]}{" "}
+                        {tabs[8]}
                       </Text>
-                    </Link>{" "}
-                  </li>{" "}
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       onClick={toggleClass}
-                      className={pathname === '/' ? 'is-active' : ''}
+                      className="is-active"
                       href={`/RealEstate`}
                     >
-                      {" "}
                       <Text
                         style={{
                           color:
@@ -346,76 +453,78 @@ const Navbar = () => {
                               : "black",
                         }}
                       >
-                        {" "}
-                        {tabs[9]}{" "}
+                        {tabs[9]}
                       </Text>
-                    </Link>{" "}
+                    </Link>
+                  </li>{" "}
+                  <li>
+                    <Link
+                      onClick={toggleClass}
+                      className="is-active"
+                      href={`/service`}
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/service"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[19]}
+                      </Text>
+                    </Link>
                   </li>
+                  {/* <li>
+                    <Link
+                      onClick={toggleClass}
+                      className="is-active"
+                      href={`/Fit-OutDesign`}
+                    >
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/Fit-OutDesign"
+                              ? "#66a109"
+                              : "black",
+                        }}
+                      >
+                        {tabs[10]}
+                      </Text>
+                    </Link>
+                  </li> */}
                 </ul>
-              </li>{" "}
-              <li className="menu-item">
-                <Link
-                  exact="true"
-                  className={pathname === '/' ? 'is-active' : ''}
-                  onClick={toggleClass}
-                  href={`/PROJECTS`}
-                >
-                  {" "}
-                  <Text
-                    style={{
-                      color:
-                        pathname === "/PROJECTS" ? "#66a109" : "black",
-                    }}
-                  >
-                    {" "}
-                    {tabs[11]}{" "}
-                  </Text>
-                </Link>
               </li>
+
               <li className="menu-item">
                 <Link
-                  exact="true"
-                  className={pathname === '/' ? 'is-active' : ''}
+                  href="/Contact"
                   onClick={toggleClass}
-                  href={`/Contact`}
+                  className="is-active"
                 >
-                  {" "}
                   <Text
                     style={{
                       color:
                         pathname === "/Contact" ? "#66a109" : "black",
                     }}
                   >
-                    {" "}
-                    {tabs[12]}{" "}
+                    {tabs[12]}
                   </Text>
                 </Link>
               </li>
-              <li className="menu-item">
-                <Link
-                  exact="true"
-                  className={pathname === '/' ? 'is-active' : ''}
-                  onClick={toggleClass}
-                  href={`/ABOUTUS`}
-                >
-                  {" "}
-                  <Text
-                    style={{
-                      color:
-                        pathname === "/ABOUTUS" ? "#66a109" : "black",
-                    }}
-                  >
-                    {" "}
-                    {tabs[13]}{" "}
-                  </Text>
-                </Link>
-              </li>
+
               <li
                 onClick={toggleSubmenu4}
                 className="menu-item sub__menus__arrows"
               >
                 <Link href="#">
-                  <Text>{tabs[15]}</Text>
+                  <Text
+                    style={{
+                      color: pathname === "/sss" ? "#66a109" : "black",
+                    }}
+                  >
+                    {tabs[16]}
+                  </Text>
                 </Link>
                 <ul className={boxClassSubMenu4.join(" ")}>
                   <li>
@@ -431,7 +540,14 @@ const Navbar = () => {
                         color: language === "ar" ? "#66a109" : "black",
                       }}
                     >
-                      <Text>{tabs[16]}</Text>
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/sss" ? "#66a109" : "black",
+                        }}
+                      >
+                        {tabs[17]}
+                      </Text>
                     </button>
                   </li>
                   <li>
@@ -447,7 +563,14 @@ const Navbar = () => {
                         color: language === "eng" ? "#66a109" : "black",
                       }}
                     >
-                      <Text>{tabs[17]}</Text>
+                      <Text
+                        style={{
+                          color:
+                            pathname === "/sss" ? "#66a109" : "black",
+                        }}
+                      >
+                        {tabs[18]}
+                      </Text>
                     </button>
                   </li>
                 </ul>

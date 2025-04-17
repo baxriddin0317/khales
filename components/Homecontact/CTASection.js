@@ -3,7 +3,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { CTAButton } from "./CTAButton";
-import img from "../../public/assets/Rectangle.png";
+import img from "../../public/assets/Porjects/1f5a52c5-139a-4684-a5ee-44d694eb301a.jpeg";
 import { useLanguage } from "../../Context/Languagecontext"; // Import the language context
 import Image from "next/image";
 
@@ -43,14 +43,16 @@ const BackgroundImage = styled(Image)`
 const Heading = styled.h2`
   position: relative;
   font-size: 60px;
-  font-family: Raleway, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: "Playfair";
   line-height: 84px;
+  color: black;
   letter-spacing: 0.8px;
   width: 45%;
   margin: 0;
+  margin-top: 200px;
   text-align: ${(props) =>
     props.$language === "ar" ? "right" : "left"}; // RTL support
-  @media (max-width: 991px) {
+ @media (max-width: 991px) {
     width: 100%;
     max-width: 100%;
     font-size: 25px;
@@ -61,6 +63,8 @@ const Heading = styled.h2`
 const Description = styled.p`
   position: relative;
   font-size: 16px;
+  color: rgb(212, 212, 212);
+
   font-weight: 500;
   line-height: 20px;
   margin: 25px 0;
@@ -82,8 +86,9 @@ export default function CTASection() {
     eng: {
       heading: (
         <>
-          Looking for expert solutions? Let’s{" "}
-          <span style={{ color: "#66a109" }}>talk!</span>
+          <span style={{ color: "white" }}>
+            Looking for expert solutions? Let’s talk!
+          </span>
         </>
       ),
       description:
@@ -92,9 +97,7 @@ export default function CTASection() {
     },
     ar: {
       heading: (
-        <>
-          تبحث عن حلول خبراء؟ <span style={{ color: "#66a109" }}>لنتحدث</span>
-        </>
+        <span style={{ color: "white" }}>تبحث عن حلول خبراء؟ لنتحدث</span>
       ),
       description:
         "لوريم إيبسوم هو نص نموذجي يستخدم في صناعة الطباعة والتنضيد. لوريم إيبسوم هو نص نموذجي يستخدم في صناعة الطباعة والتنضيد.",

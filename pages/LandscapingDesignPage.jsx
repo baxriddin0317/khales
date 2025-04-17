@@ -8,6 +8,7 @@ import CTASection from "../components/Homecontact/CTASection";
 import ProjectHighlight from "../components/Projecthighlights/ProjectHighlight";
 import { useLanguage } from "../Context/Languagecontext"; // Import the language context
 import dynamic from "next/dynamic";
+import banner from "@/public/assets/banner/project.jpeg"
 const HeroSlider = dynamic(() => import('@/components/Slider/Slider'));
 
 export const slides = {
@@ -15,7 +16,7 @@ export const slides = {
     {
       id: 1,
       image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+        banner,
       title: "Breathtaking Landscapes That Inspire",
       content: "Transform your outdoor space into a natural masterpiece",
       button: "Book Your Design",
@@ -25,7 +26,7 @@ export const slides = {
     {
       id: 1,
       image:
-        "https://i.ibb.co/DPKhyq7k/khales-ae-real-photograph-of-a-super-luxury-modern-mansion-fr-c2c57d33-5a47-4ccb-b054-498b16745d23-3.png",
+        banner,
       title: "مناظر طبيعية خلابة تُلهم",
       content: "حوّل مساحتك الخارجية إلى لوحة فنية طبيعية",
       button: " احجز تصميمك الآن",
