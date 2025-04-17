@@ -54,7 +54,7 @@ const HeaderNumber = styled.div`
 `;
 
 const HeaderTitle = styled.div`
-  font-family: "Inter ExtraLight", sans-serif;
+  font-family: "Playfair";
   font-weight: 100;
   font-size: 24px;
   line-height: 28.8px;
